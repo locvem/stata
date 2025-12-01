@@ -107,7 +107,7 @@ if _rc generate double 合计 = .
 if "`sumvars'" != "" {
     egen double __row_total = rowtotal(`sumvars') if need_fix == 1
     bysort `groupvars': egen double __grp_total = total(__row_total)
-    replace 合计 = __grp_total if need_fix == 1
+    replace 合计 = __grp_total if need_fix == 1 & missing(合计)
     drop __row_total __grp_total
 }
 
